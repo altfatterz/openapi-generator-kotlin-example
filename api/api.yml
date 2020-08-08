@@ -1,0 +1,129 @@
+# API-first development with OpenAPI
+# This file will be used at compile time to generate Spring-MVC endpoint stubs using openapi-generator
+openapi: '3.0.3'
+
+info:
+  title: ebaccount
+  version: 0.0.1
+
+servers:
+  - url: /api
+    description: Development server
+
+tags:
+  - name: Account
+
+paths:
+  /accounts:
+    get:
+      tags:
+        - Account
+      operationId: listAccounts
+      summary: List accounts
+      description: List all accounts available to a contract number
+      responses:
+        '200':
+          description: List of all available accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+
+        # Definition of all error statuses
+        '500':
+          $ref: '#/components/responses/Problem'
+
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          description: Konto Laufnummer (KT_LNR)
+          type: long
+        accountOwnerId:
+          description: Kundennummer (KD_NR)
+          type: string
+          maxLength: 12
+        accountNumber:
+          description: Kontonummer (EDIT_KT_NR)
+          type: string
+          maxLength: 20
+        category:
+          description: Rubrik (RUBRIK)
+          type: string
+          maxLength: 80
+        iban:
+          description: IBAN (IBAN_ID)
+          type: string
+          maxLength: 34
+        balance:
+          description: Kontowaehrung
+          $ref: '#/components/schemas/Money'
+        balanceContractCurrency:
+          description: Buchungswaehrung
+          $ref: '#/components/schemas/Money'
+        productType:
+          description: Kontoart (KT_ART_NR)
+          $ref: '#/components/schemas/ProductType'
+        description:
+          description: Bezeichnung (BEZ_LANG_DE)
+          type: string
+          maxLength: 80
+      example:
+        id: 44700555466844
+        accountOwnerId: 302974698
+        accountNumber: 535.769.93
+        category: Haushalt
+        iban: CH6008401000053576993
+        balance:
+          value: 1895.45
+          currency: CHF
+        balanceContractCurrency:
+          value: 1895.45
+          currency: CHF
+        productType: Privatkonto
+        description: Privatkonto
+
+    Money:
+      type: object
+      properties:
+        value:
+          type: number
+        currency:
+          type: string
+          minLength: 3
+          maxLength: 3
+
+    ProductType:
+      type: string
+      enum:
+        - Privatkonto
+        - Savings
+        - Depot
+
+  responses:
+    Problem:
+      description: error occurred - see status code and problem object for more information.
+      content:
+        'application/problem+json':
+          schema:
+            $ref: '../problem-schema.yaml#/Problem'
+          example:
+            url: https://migriosbank.ch/problem/not-found
+            title: Resource not found
+            status: 404
+            detail: index.html not found
+            instance: /ebaccount/not-found
+
+  securitySchemes:
+    cookie:
+      type: apiKey
+      description: Cookie Token Authentication
+      name: Auth
+      in: cookie
+
+security:
+  - cookie: []
