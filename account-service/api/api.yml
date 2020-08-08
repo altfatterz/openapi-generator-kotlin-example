@@ -3,7 +3,7 @@
 openapi: '3.0.3'
 
 info:
-  title: ebaccount
+  title: account
   version: 0.0.1
 
 servers:
@@ -18,12 +18,12 @@ paths:
     get:
       tags:
         - Account
-      operationId: listAccounts
-      summary: List accounts
-      description: List all accounts available to a contract number
+      operationId: getAccounts
+      summary: Get accounts
+      description: Get all accounts available to a contract number
       responses:
         '200':
-          description: List of all available accounts
+          description: Get all available accounts
           content:
             application/json:
               schema:
@@ -112,11 +112,11 @@ components:
           schema:
             $ref: '../problem-schema.yaml#/Problem'
           example:
-            url: https://migriosbank.ch/problem/not-found
+            url: https://bank.ch/problem/not-found
             title: Resource not found
             status: 404
             detail: index.html not found
-            instance: /ebaccount/not-found
+            instance: /account/not-found
 
   securitySchemes:
     cookie:

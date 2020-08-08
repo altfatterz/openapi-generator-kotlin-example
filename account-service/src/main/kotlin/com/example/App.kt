@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class OpenapiGeneratorKotlinExampleApplication
+class App
 
 fun main(args: Array<String>) {
-    runApplication<OpenapiGeneratorKotlinExampleApplication>(*args)
+    runApplication<App>(*args)
 }
