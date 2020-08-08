@@ -42,7 +42,7 @@ components:
       properties:
         id:
           description: Konto Laufnummer (KT_LNR)
-          type: number
+          type: string
         accountOwnerId:
           description: Kundennummer (KD_NR)
           type: string
@@ -65,9 +65,9 @@ components:
         balanceContractCurrency:
           description: Buchungswaehrung
           $ref: '#/components/schemas/Money'
-        productType:
+        accountType:
           description: Kontoart (KT_ART_NR)
-          $ref: '#/components/schemas/ProductType'
+          $ref: '#/components/schemas/AccountType'
         description:
           description: Bezeichnung (BEZ_LANG_DE)
           type: string
@@ -84,7 +84,7 @@ components:
         balanceContractCurrency:
           value: 1895.45
           currency: CHF
-        productType: Privatkonto
+        accountType: Privatkonto
         description: Privatkonto
 
     Money:
@@ -97,7 +97,7 @@ components:
           minLength: 3
           maxLength: 3
 
-    ProductType:
+    AccountType:
       type: string
       enum:
         - Privatkonto
