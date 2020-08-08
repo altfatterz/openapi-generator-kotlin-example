@@ -42,7 +42,7 @@ components:
       properties:
         id:
           description: Konto Laufnummer (KT_LNR)
-          type: long
+          type: number
         accountOwnerId:
           description: Kundennummer (KD_NR)
           type: string
