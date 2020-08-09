@@ -19,6 +19,13 @@ paths:
       tags:
         - Account
       operationId: getAccounts
+      parameters:
+        - name: cookieValue
+          in: query
+          required: true
+          schema:
+            type: string
+
       summary: Get accounts
       description: Get all accounts available to a contract number
       responses:
@@ -110,7 +117,7 @@ components:
       content:
         'application/problem+json':
           schema:
-            $ref: '../problem-schema.yaml#/Problem'
+            $ref: './problem-schema.yaml#/Problem'
           example:
             url: https://bank.ch/problem/not-found
             title: Resource not found
