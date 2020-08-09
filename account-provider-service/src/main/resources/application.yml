@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: account-provider-service
+
+server:
+  port: 8081

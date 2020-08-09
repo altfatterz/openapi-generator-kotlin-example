@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
 
 @SpringBootApplication
-class App
+class AccountServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<App>(*args)
+    runApplication<AccountServiceApplication>(*args)
 }

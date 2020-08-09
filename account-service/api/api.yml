@@ -20,7 +20,7 @@ paths:
         - Account
       operationId: getAccounts
       parameters:
-        - name: cookieValue
+        - name: apiKey
           in: query
           required: true
           schema:

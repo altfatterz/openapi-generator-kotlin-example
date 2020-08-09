@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service
 @Service
 class AccountService(private val accountClient : AccountClient) : AccountApiService {
 
-    override fun getAccounts(cookieValue: String): List<Account> {
+    override fun getAccounts(apiKey: String): List<Account> {
 
-        return accountClient.getAccounts(cookieValue);
+        return accountClient.getAccounts(apiKey);
     }
 
 }
