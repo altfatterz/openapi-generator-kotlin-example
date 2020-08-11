@@ -1,6 +1,7 @@
 package com.example.client
 
 import com.example.model.Account
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -15,7 +16,11 @@ class AccountClient(
         private val bankRestApi: String
 ) {
 
+    private val logger = LoggerFactory.getLogger(javaClass)
+
     fun getAccounts(apiKey: String): List<Account> {
+
+        logger.info("Received apiKey: {}", apiKey)
 
         // pass the apiKey as cookieValue
         val httpHeaders = HttpHeaders()
@@ -25,6 +30,8 @@ class AccountClient(
         val response = restTemplate.exchange(bankRestApi, GET, HttpEntity<String>(httpHeaders),
                 Array<com.example.client.Account>::class.java)
 
+        logger.info("Status code from playserver API: {}", response.statusCode)
+        
         // map
         return response.body!!.map {
             Account(id = it.id, iban = it.iban)
